@@ -63,7 +63,15 @@ public class MainActivity extends AppCompatActivity {
                 //verificando se a letra inserida ja foi adicionada
                 for(int i = 0; i <= letrasUsadas.length; i++){
                     
-                    
+                    String letraa = letrasUsadas[i];
+
+                    if (letraa == letra.toUpperCase()){
+                        //letra ja foi usada
+                        //precisa dar erro
+                        i = letrasUsadas.length;
+                    } else{
+                        continue;
+                    }
                     
                 }
 
