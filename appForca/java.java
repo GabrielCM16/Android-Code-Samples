@@ -23,18 +23,58 @@ public class MainActivity extends AppCompatActivity {
         entrada = findViewById(R.id.);
     }
 
+    final static public String palavras[] = {"a", "b"};
 
-    public String palavras[] = {"a", "b"};
+    final static String palavraSoteada = palavras[sortea()];
 
-    String palavraSoteada = palavras[sortea()];
+    final static String letrasUsadas[] = new String[palavraSoteada.length()];
 
+    final static int vidas = 0;
 
+    final static int dificuldade = 10;
+
+    final static int aux = 0;
+
+    
+    public void reiniciarJogo(View view, int di) {
+
+        palavraSoteada = palavras[sortea()];
+
+        String letrasUsadas[] = new String[palavraSoteada.length()];
+        
+        vidas = 0;
+
+        aux = 0;
+
+        dificuldade = di;
+        
+    }
 
     public void Jogar(View view){
 
         String letra = entrada.getText().toString();
 
-        if (letra.)
+        if (vidas == dificuldade){
+            //perdeu o jogo
+        } else {
+            if (letra.length() == 1){
+                //é uma letra adiciona no vetor somente se nao estiver
+
+                //verificando se a letra inserida ja foi adicionada
+                for(int i = 0; i <= letrasUsadas.length; i++){
+                    
+                    
+                    
+                }
+
+                letrasUsadas[aux] = letra.toUpperCase();
+            } else {
+                //não é uma letra precisa dar erro
+            }
+
+            
+
+        }
 
     }
 
