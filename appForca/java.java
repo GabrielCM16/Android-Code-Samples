@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         entrada = findViewById(R.id.);
     }
 
-    final static public String palavras[] = {"a", "b"};
+    final static public String palavras[] = {"RATO", "SAPO", "MARRECO", "PANELA", "CAVALO", "MACHADO", "CEREJA", "LIMAO", "LARANJA", "LELIS"};
 
     final static String palavraSoteada = palavras[sortea()];
 
@@ -47,12 +47,20 @@ public class MainActivity extends AppCompatActivity {
         aux = 0;
 
         dificuldade = di;
+
+        String palavra_incompleta = "";
+
+        String palavra_aux = "";
         
     }
 
     public void Jogar(View view){
 
+        String palavra_aux = "";
+
         String letra = entrada.getText().toString();
+
+        boolean repete = false;
 
         if (vidas == dificuldade){
             //perdeu o jogo
@@ -65,17 +73,35 @@ public class MainActivity extends AppCompatActivity {
                     
                     String letraa = letrasUsadas[i];
 
-                    if (letraa == letra.toUpperCase()){
+                    if (letraa.equals(letra.toUpperCase())){
                         //letra ja foi usada
                         //precisa dar erro
+                        repete = true;
                         i = letrasUsadas.length;
                     } else{
                         continue;
                     }
-                    
+                }
+                if (!repete){ //se a letra nao repete
+
+                    for(int i = 0; i < palavraSoteada.length(); i++){
+
+                        String letraDaStr = palavraSoteada.substring(i,i+1);
+
+                        if(letra.equals(letraDaStr)){
+                            palavra_aux += letra;
+                        } else {
+                            palavra_aux += '_';
+                        }
+
+                    }
+
+                    palavra_incompleta = palavra_aux;
+
+                    letrasUsadas[aux] = letra.toUpperCase();
+                    aux += 1;
                 }
 
-                letrasUsadas[aux] = letra.toUpperCase();
             } else {
                 //não é uma letra precisa dar erro
             }
@@ -83,6 +109,14 @@ public class MainActivity extends AppCompatActivity {
             
 
         }
+
+
+        //Verificando se ja ganhou
+
+        if(palavraSoteada.equals(palavra_incompleta)){
+            //ganhouuuu
+        }
+
 
     }
 
