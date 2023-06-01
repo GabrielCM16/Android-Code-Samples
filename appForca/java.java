@@ -1,67 +1,90 @@
-package com.example.jogoforca;
+package com.example.forca;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.Random;
 
-import javax.xml.transform.sax.SAXResult;
+
 
 public class MainActivity extends AppCompatActivity {
 
-    public TextInputEditText entrada;
+    public EditText entradaTexto;
+    public TextView SaidaVida;
+    public TextView SaidaPalavras;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        entrada = findViewById(R.id.);
+        entradaTexto = findViewById(R.id.entrada);
+
+        SaidaPalavras = findViewById(R.id.SaidaPalavra);
+
+        SaidaVida = findViewById(R.id.SaidaVidas);
     }
 
     final static public String palavras[] = {"RATO", "SAPO", "MARRECO", "PANELA", "CAVALO", "MACHADO", "CEREJA", "LIMAO", "LARANJA", "LELIS"};
 
-    final static String palavraSoteada = palavras[sortea()];
+    static String palavraSoteada = palavras[sortea()];
 
-    final static String letrasUsadas[] = new String[palavraSoteada.length()];
+    static int im = palavraSoteada.length();
 
-    final static int vidas = 0;
+    final static String letrasUsadas[] = new String[im];
 
-    final static int dificuldade = 10;
+    public static int vidas = 0;
 
-    final static int aux = 0;
+    static int dificuldade = 10;
+
+    static int aux = 0;
+
+    public static String palavra_incompleta = "";
+
+    public static String palavra_aux = "";
 
 
-    
-    public void reiniciarJogo(View view, int di) {
+
+    public void reiniciarJogo(View view) {
+
+        SaidaVida.setText(vidas);
 
         palavraSoteada = palavras[sortea()];
 
-        String letrasUsadas[] = new String[palavraSoteada.length()];
-
-        
         vidas = 0;
 
         aux = 0;
 
-        dificuldade = di;
+        dificuldade = 10;
 
-        String palavra_incompleta = "";
+        palavra_incompleta = "";
 
-        String palavra_aux = "";
-        
+        palavra_aux = "";
+
     }
 
     public void Jogar(View view){
 
 
-        String palavra_aux = "";
+        String n_vida = Integer.toString(10 - vidas);
+        SaidaVida.setText("Chances restantes = "+ (n_vida));
 
-        String letra = entrada.getText().toString();
+        SaidaPalavras.setText(palavraSoteada);
+
+        palavra_aux = "";
+
+        StringBuilder sb = new StringBuilder(palavra_incompleta);
+
+
+        String letra = entradaTexto.getText().toString();
 
         boolean repete = false;
 
@@ -73,41 +96,40 @@ public class MainActivity extends AppCompatActivity {
                 //é uma letra adiciona no vetor somente se nao estiver
 
                 //verificando se a letra inserida ja foi adicionada
-                for(int i = 0; i <= letrasUsadas.length; i++){
-                    
-                    String letraa = letrasUsadas[i];
-
-                    if (letraa.equals(letra.toUpperCase())){
-                        //letra ja foi usada
-                        //precisa dar erro
-                        String textoo = "Letra ja inserida!";
-                        abrirToast(textoo);
-
-                        vidas += 1;
-
-                        repete = true;
-                        i = letrasUsadas.length;
-                    } else{
-                        continue;
-                    }
-                }
+//                for(int i = 0; i <= letrasUsadas.length; i++){
+//
+//                    String letraa = letrasUsadas[i];
+//
+//                    if (letraa.equals(letra.toUpperCase())){
+//                        //letra ja foi usada
+//                        //precisa dar erro
+//                        String textoo = "Letra ja inserida!";
+//                        abrirToast(textoo);
+//
+//                        vidas += 1;
+//
+//                        repete = true;
+//                        i = letrasUsadas.length;
+//                    } else{
+//                        continue;
+//                    }
+//                }
                 if (!repete){ //se a letra nao repete
 
-                    
+
 
                     for(int i = 0; i < palavraSoteada.length(); i++){
 
-                        String letraDaStr = palavraSoteada.substring(i,i+1);
+                        char letraDaStr = palavraSoteada.charAt(i);
 
                         if(letra.equals(letraDaStr)){
-                            palavra_aux += letra;
+                            sb.setCharAt(i, letraDaStr);
                         } else {
                             palavra_aux += '_';
                         }
 
                     }
 
-                    palavra_incompleta = palavra_aux;
 
                     //adicionar a letra no vetor de letras usadas
                     letrasUsadas[aux] = letra.toUpperCase();
@@ -120,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
                 abrirToast(textoo);
             }
 
-            
+
 
         }
 
@@ -132,12 +154,16 @@ public class MainActivity extends AppCompatActivity {
             abrirToast(textoo);
         }
 
+        n_vida = Integer.toString(10 - vidas);
+        SaidaVida.setText("Chances restantes = "+ (n_vida));
+        SaidaPalavras.setText(palavra_incompleta);
+
 
     }
 
 
 
-    public int sortea(){
+    public static int sortea(){
         Random gerador = new Random();
 
         int num1 = gerador.nextInt(palavras.length);
