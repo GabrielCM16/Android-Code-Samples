@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         SaidaVida = findViewById(R.id.SaidaVidas);
     }
 
-    final static public String palavras[] = {"RATO", "SAPO", "MARRECO", "PANELA", "CAVALO", "MACHADO", "CEREJA", "LIMAO", "LARANJA", "LELIS"};
+    final static public String palavras[] = {"RATO", "SAPO", "MARRECO", "PANELA", "CAVALO", "MACHADO", "CEREJA", "LIMAO", "LARANJA"};
 
     static String palavraSoteada = palavras[sortea()];
 
@@ -98,6 +98,9 @@ public class MainActivity extends AppCompatActivity {
 
                 if (palavraSoteada.contains(emm)){ //se a letra esta na palavra
 
+                    String textoo = "A letra inserida existe";
+                    abrirToast(textoo);
+
                     char letra = emm.charAt(0);
 
                     for(int i = 0; i < palavraSoteada.length(); i++){
@@ -113,6 +116,8 @@ public class MainActivity extends AppCompatActivity {
                     aux += 1;
                 } else {
                     vidas += 1;
+                    String textoo = "A letra inserida não existe";
+                    abrirToast(textoo);
                 }
 
             } else {
