@@ -8,7 +8,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.Random;
 
@@ -39,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
     static int im = palavraSoteada.length();
 
-    final static String letrasUsadas[] = new String[im];
+    static String letrasUsadas = "";
 
     public static int vidas = 0;
 
@@ -51,89 +50,69 @@ public class MainActivity extends AppCompatActivity {
 
     public static String palavra_aux = "";
 
-
-
     public void reiniciarJogo(View view) {
 
-        SaidaVida.setText(vidas);
+        String n_vida = Integer.toString(10 - vidas);
+        SaidaVida.setText("Chances restantes = "+ (n_vida) + "\n" + "Palavra com: " + im + " Letras");
 
         palavraSoteada = palavras[sortea()];
 
         vidas = 0;
 
-        aux = 0;
+        im = palavraSoteada.length();
 
         dificuldade = 10;
 
         palavra_incompleta = "";
 
-        palavra_aux = "";
+        letrasUsadas = "";
+
+        for (int i = 0; i < palavraSoteada.length(); i++){
+            palavra_incompleta += '_';
+        }
+
+        StringBuilder sb = new StringBuilder(palavra_incompleta);
 
     }
 
     public void Jogar(View view){
 
+        StringBuilder sb = new StringBuilder(palavra_incompleta);
+
 
         String n_vida = Integer.toString(10 - vidas);
-        SaidaVida.setText("Chances restantes = "+ (n_vida));
+        SaidaVida.setText("Chances restantes = "+ (n_vida) + "\n" + "Palavra com: " + im + " Letras");
 
         SaidaPalavras.setText(palavraSoteada);
 
         palavra_aux = "";
 
-        StringBuilder sb = new StringBuilder(palavra_incompleta);
+        String emm = entradaTexto.getText().toString();
 
-
-        String letra = entradaTexto.getText().toString();
-
-        boolean repete = false;
 
         if (vidas >= dificuldade){
             String textoo = "Voce perdeu o jogo!";
             abrirToast(textoo);
         } else {
-            if (letra.length() == 1){
-                //é uma letra adiciona no vetor somente se nao estiver
+            if (emm.length() == 1){
 
-                //verificando se a letra inserida ja foi adicionada
-//                for(int i = 0; i <= letrasUsadas.length; i++){
-//
-//                    String letraa = letrasUsadas[i];
-//
-//                    if (letraa.equals(letra.toUpperCase())){
-//                        //letra ja foi usada
-//                        //precisa dar erro
-//                        String textoo = "Letra ja inserida!";
-//                        abrirToast(textoo);
-//
-//                        vidas += 1;
-//
-//                        repete = true;
-//                        i = letrasUsadas.length;
-//                    } else{
-//                        continue;
-//                    }
-//                }
-                if (!repete){ //se a letra nao repete
+                if (palavraSoteada.contains(emm)){ //se a letra esta na palavra
 
-
+                    char letra = emm.charAt(0);
 
                     for(int i = 0; i < palavraSoteada.length(); i++){
 
                         char letraDaStr = palavraSoteada.charAt(i);
 
-                        if(letra.equals(letraDaStr)){
+                        if(letra == letraDaStr){
                             sb.setCharAt(i, letraDaStr);
-                        } else {
-                            palavra_aux += '_';
                         }
-
                     }
-
-
                     //adicionar a letra no vetor de letras usadas
-                    letrasUsadas[aux] = letra.toUpperCase();
+                    letrasUsadas += emm.toUpperCase();
                     aux += 1;
+                } else {
+                    vidas += 1;
                 }
 
             } else {
@@ -142,25 +121,23 @@ public class MainActivity extends AppCompatActivity {
                 abrirToast(textoo);
             }
 
-
-
         }
 
-
         //Verificando se ja ganhou
+
+        palavra_incompleta = sb.toString();
 
         if(palavraSoteada.equals(palavra_incompleta)){
             String textoo = "Voce Ganhouuu";
             abrirToast(textoo);
         }
 
+
         n_vida = Integer.toString(10 - vidas);
-        SaidaVida.setText("Chances restantes = "+ (n_vida));
+        SaidaVida.setText("Chances restantes = "+ (n_vida) + "\n" + "Palavra com: " + im + " Letras");
         SaidaPalavras.setText(palavra_incompleta);
 
-
     }
-
 
 
     public static int sortea(){
