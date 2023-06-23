@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity" >
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Calcular Giorjeta"
+        android:textSize="24sp" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/entradaTexto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Entre com o valor da conta" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/textopessoas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="N pessoas: 0" />
+
+    <SeekBar
+        android:id="@+id/seekBarPessoas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:max="10"
+        android:min="1"
+        android:padding="10dp"
+        android:progress="0" />
+
+    <TextView
+        android:id="@+id/textoGorjeta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Porcentagem da gorjeta: 0%" />
+
+    <SeekBar
+        android:id="@+id/seekBarGorjeta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:max="100"
+        android:padding="10dp"
+        android:progress="0" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="abrirDialog"
+        android:text="Calcular gorjeta" />
+
+    <TextView
+        android:id="@+id/saidaTexto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Valores: "
+        android:textSize="20sp" />
+</LinearLayout>
