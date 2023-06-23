@@ -111,7 +111,8 @@ public class MainActivity extends AppCompatActivity {
                 double valorGorjeta = number * (a / 100.00);
                 double valores = (number / nPessoas) + valorGorjeta;
 
-                saidaTexto.setText("Valores por pessoa: R$" + valores  );
+                saidaTexto.setText("Valores por pessoa: R$" + valores);
+                abrirToast("Valores por pessoa: R$" + valores);
 
             }
         });
@@ -126,6 +127,7 @@ public class MainActivity extends AppCompatActivity {
                 double valores = (number / nPessoas);
 
                 saidaTexto.setText("Valores por pessoa: R$" + valores  );
+                abrirToast("Valores por pessoa: R$" + valores);
             }
         });
 
@@ -134,6 +136,16 @@ public class MainActivity extends AppCompatActivity {
         dialog.create();
         dialog.show();
 
-
     }
+
+    public void abrirToast(String texto){
+
+        Toast.makeText(
+                getApplicationContext(),
+                texto,
+                Toast.LENGTH_LONG
+        ).show();
+    }
+
+
 }
