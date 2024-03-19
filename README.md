@@ -1,5 +1,5 @@
-# Topicos-TEI
+# Android-Code-Samples
 
-repositório criado para salvar os códigos xml e java ultilizados na matéria de Tópicos Especiais em Informática (TEI).
+codigos java para android
 
 By: Gabe
