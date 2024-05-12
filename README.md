@@ -1,5 +1,4 @@
 # Android-Code-Samples
 
-codigos java para android
-
-By: Gabe
+- Este repositório é uma coleção de exemplos de código para Android utilizando Java. Não só copie, mas aprenda também!
+- By: Gabe
